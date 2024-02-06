@@ -28,6 +28,8 @@ const Home: NextPage = async () => {
 
 export default Home
 
+export const revalidate = 60
+
 async function getData() {
   const query = groq`
     *[_type == 'article'] | order(publishedAt desc) {
