@@ -17,7 +17,7 @@ const Article: FC<Props> = ({ article }) => {
       />
       <h2 className={styles.container__title}>{article.title}</h2>
       <div className={styles.container__description}>
-        <PortableText blocks={article.body} />
+        <PortableText value={article.body} />
       </div>
       {/* <ul>
         {article.tags.map((tag) => (
