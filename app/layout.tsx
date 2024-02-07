@@ -1,8 +1,22 @@
 import type { Metadata } from 'next'
-import { Work_Sans } from 'next/font/google'
 import './styles/global.scss'
+import LenisWrapper from '@/app/components/LenisWrapper'
+import localFont from 'next/font/local'
 
-const workSans = Work_Sans({ subsets: ['latin'] })
+const neueMontreal = localFont({
+  src: [
+    {
+      path: '../public/fonts/NeueMontreal-Light.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/NeueMontreal-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+})
 
 export const metadata: Metadata = {
   title: 'Mon blog accessible',
@@ -16,7 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={workSans.className}>{children}</body>
+      <body className={neueMontreal.className}>
+        <LenisWrapper>{children}</LenisWrapper>
+      </body>
     </html>
   )
 }
