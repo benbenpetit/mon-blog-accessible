@@ -1,4 +1,4 @@
-import { ITag } from '@/app/core/types/ITag'
+import { ITag } from '@/core/types/ITag'
 
 export interface IArticle {
   _id: string

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import './styles/global.scss'
-import LenisWrapper from '@/app/components/LenisWrapper'
+import '@/styles/global.scss'
+import LenisWrapper from '@/components/LenisWrapper'
 import localFont from 'next/font/local'
 
 const neueMontreal = localFont({
