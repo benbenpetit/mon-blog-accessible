@@ -11,7 +11,7 @@ interface Props {
 }
 
 const ArticlesList: FC<Props> = ({ articles }) => {
-  const articleRefs: any = articles.reduce((acc: any, article, index) => {
+  const articleRefs: any = articles.reduce((acc: any, _, index) => {
     acc[index] = React.createRef()
     return acc
   }, {})
@@ -33,8 +33,7 @@ const ArticlesList: FC<Props> = ({ articles }) => {
             },
             y: `${-3 + normalizedIndex * 3}vh`,
             scale: 0.9 + normalizedIndex * 0.15,
-            filter: `blur(3px)`,
-            position: 'sticky',
+            filter: `blur(2px)`,
             ease: 'none',
           })
         })
@@ -42,7 +41,7 @@ const ArticlesList: FC<Props> = ({ articles }) => {
     })
 
     return () => ctx.revert()
-  }, [])
+  }, [articles, articleRefs])
 
   return (
     <ul className={styles.articlesList}>

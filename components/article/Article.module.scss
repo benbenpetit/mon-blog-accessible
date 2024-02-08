@@ -2,20 +2,21 @@
   --offset: 5vmin;
   --border-radius: 5vmin;
   display: block;
-  // position: sticky;
   top: var(--offset);
   height: 60vh;
   width: calc(100% - 2 * var(--offset));
   margin: var(--offset);
   border-radius: var(--border-radius);
   transform-origin: top center;
+  outline: 4px dashed #fff;
+  overflow: hidden;
 
   @media screen and (min-width: 768px) {
     height: calc(100vh - 2 * var(--offset));
   }
 
-  &:focus {
-    outline: 6px dashed #000;
+  &:focus:not(:active) {
+    outline: 12px dashed #fff;
   }
 
   &__wrapper {
@@ -26,15 +27,37 @@
   }
 
   &__cover {
+    position: relative;
+    z-index: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
     border-radius: var(--border-radius);
-    display: block;
+
+    &__filter {
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: #1b7b4e;
+      opacity: 0.2;
+      display: block;
+      pointer-events: none;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      display: block;
+    }
   }
 
   &__title {
     position: absolute;
+    z-index: 1;
     left: 0;
     bottom: 0;
     width: 90%;
