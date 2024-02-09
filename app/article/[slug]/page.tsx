@@ -21,7 +21,7 @@ const workSans = Work_Sans({
   subsets: ['latin'],
 })
 
-const ArticlePage: NextPage<Props> = ({ article }) => {
+const ArticlePage = ({ article }: Props) => {
   const pageRef = useRef<HTMLDivElement | null>(null)
   const navWrapperRef = useRef<HTMLDivElement | null>(null)
 
