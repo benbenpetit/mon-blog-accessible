@@ -12,16 +12,16 @@ import useIsomorphicLayoutEffect from '@/core/utils/useIsomorphicLayoutEffect'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
-interface Props {
-  article: IArticle
-}
+// interface Props {
+//   article: IArticle
+// }
 
 const workSans = Work_Sans({
   weight: '400',
   subsets: ['latin'],
 })
 
-const ArticlePage = ({ article }: Props) => {
+const ArticlePage = ({ article }: any) => {
   const pageRef = useRef<HTMLDivElement | null>(null)
   const navWrapperRef = useRef<HTMLDivElement | null>(null)
 
