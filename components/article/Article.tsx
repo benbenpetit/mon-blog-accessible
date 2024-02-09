@@ -1,9 +1,10 @@
 'use client'
-import React, { forwardRef, useLayoutEffect, useRef, useState } from 'react'
+import React, { forwardRef, useRef, useState } from 'react'
 import styles from './Article.module.scss'
 import { IArticle } from '@/core/types/IArticle'
 import Link from 'next/link'
 import gsap from 'gsap'
+import useIsomorphicLayoutEffect from '@/core/utils/useIsomorphicLayoutEffect'
 
 interface Props {
   article: IArticle
@@ -15,7 +16,7 @@ const Article = forwardRef<HTMLAnchorElement, Props>(
     const [isBaseSticky, setIsBaseSticky] = useState(false)
     const coverFilterRef = useRef<HTMLDivElement | null>(null)
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       const ctx = gsap.context(() => {
         gsap.fromTo(
           coverFilterRef.current,
