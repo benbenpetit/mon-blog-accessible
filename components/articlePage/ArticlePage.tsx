@@ -1,7 +1,7 @@
 'use client'
 import { IArticle } from '@/core/types/IArticle'
 import React, { FC, useRef } from 'react'
-import styles from './articlePage.module.scss'
+import styles from './ArticlePage.module.scss'
 import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
 import { Work_Sans } from 'next/font/google'
