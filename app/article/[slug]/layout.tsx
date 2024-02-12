@@ -2,35 +2,60 @@ import { groq } from 'next-sanity'
 import * as queries from '@/core/sanity/queries'
 import { IArticle } from '@/core/types/IArticle'
 import { client } from '@/core/lib/sanity'
-import { ReactNode } from 'react'
-import { LayoutProps } from '@/.next/types/app/layout'
-import { NextPage } from 'next'
 import ArticlePage from '@/app/article/[slug]/page'
+import { ReactNode } from 'react'
 
-const Layout: NextPage<LayoutProps> = async ({ params }) => {
+interface Props {
+  children: ReactNode
+  params: {
+    slug: string
+  }
+}
+
+export default async function Layout({ params }: Props) {
   const data = await getData(params.slug)
 
   return (
     <>
-      <ArticlePage article={data.article} />
+      <ArticlePage
+        article={data.current}
+        prevSlug={data.prevSlug}
+        nextSlug={data.nextSlug}
+      />
     </>
   )
 }
-
-export default Layout
 
 export const revalidate = 60
 
 async function getData(slug: string) {
   const query = groq`
-    *[_type == 'article' && slug.current == '${slug}'] | order(publishedAt asc) {
-      ${queries.article}
-    }[0]
+    *[_type == 'article' && slug.current == '${slug}']{
+      "currentArticle": { 
+        ${queries.article}
+      },
+      "prevArticle": *[_type == 'article' && ^.publishedAt > publishedAt] | order(publishedAt desc)[0] { 
+        "slug": slug.current,
+      },
+      "nextArticle": *[_type == 'article' && ^.publishedAt < publishedAt] | order(publishedAt asc)[0] { 
+        "slug": slug.current,
+      },
+    } | order(publishedAt)[0]
   `
 
-  const article: IArticle = await client.fetch(query)
+  const data: {
+    currentArticle: IArticle
+    prevArticle?: {
+      slug: string
+    }
+    nextArticle?: {
+      slug: string
+    }
+  } = await client.fetch(query)
 
   return {
-    article,
+    current: data.currentArticle,
+    prevSlug: data.prevArticle?.slug,
+    nextSlug: data.nextArticle?.slug,
   }
 }

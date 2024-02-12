@@ -12,16 +12,20 @@ import useIsomorphicLayoutEffect from '@/core/utils/useIsomorphicLayoutEffect'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
-// interface Props {
-//   article: IArticle
-// }
-
 const workSans = Work_Sans({
   weight: '400',
   subsets: ['latin'],
 })
 
-const ArticlePage = ({ article }: any) => {
+const ArticlePage = ({
+  article,
+  prevSlug = '',
+  nextSlug = '',
+}: {
+  article: IArticle
+  prevSlug?: string
+  nextSlug?: string
+}) => {
   const pageRef = useRef<HTMLDivElement | null>(null)
   const navWrapperRef = useRef<HTMLDivElement | null>(null)
 
@@ -38,7 +42,6 @@ const ArticlePage = ({ article }: any) => {
   }
 
   const getHeight = () => {
-    // get clamp(20vh, 80vw, 70vh) in javascript
     const vw = Math.max(
       document.documentElement.clientWidth || 0,
       window.innerWidth || 0
@@ -103,12 +106,51 @@ const ArticlePage = ({ article }: any) => {
       </div>
       <div className={styles.articlePage__nav}>
         <div className={styles.articlePage__nav__wrapper} ref={navWrapperRef}>
-          <Link href={'#'}>
-            <span>Précédent</span>
-          </Link>
-          <Link href={'#'}>
-            <span>Suivant</span>
-          </Link>
+          {[
+            { slug: prevSlug, label: 'Précédent' },
+            { slug: nextSlug, label: 'Suivant' },
+          ].map((item) => {
+            const isSlug = !!item.slug
+            console.log(isSlug)
+            return (
+              <Link
+                key={item.slug}
+                href={isSlug ? `/article/${item.slug}` : '/'}
+                className={clsx(!isSlug && styles.disabled)}
+                aria-disabled={!isSlug}
+                tabIndex={isSlug ? undefined : -1}
+              >
+                {!isSlug && (
+                  <div className={styles.rubalise} aria-hidden>
+                    {[
+                      { rotate: -30, translate: { x: 20, y: 10 } },
+                      { rotate: -5, translate: { x: 10, y: -20 } },
+                      { rotate: 20, translate: { x: -15, y: 10 } },
+                    ].map((rubalise, i) => {
+                      return (
+                        <div
+                          key={i}
+                          className={styles.rubalise__inside}
+                          style={{
+                            transform: `translate(${
+                              rubalise.translate.x - 50
+                            }%, ${rubalise.translate.y - 50}%) rotate(${
+                              rubalise.rotate
+                            }deg)`,
+                          }}
+                        >
+                          {[...Array(16)].map((_, i) => (
+                            <span key={i} />
+                          ))}
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+                <span>{item.label}</span>
+              </Link>
+            )
+          })}
         </div>
       </div>
     </div>
