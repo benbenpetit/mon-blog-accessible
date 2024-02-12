@@ -5,15 +5,16 @@ import { IArticle } from '@/core/types/IArticle'
 import Link from 'next/link'
 import gsap from 'gsap'
 import useIsomorphicLayoutEffect from '@/core/utils/useIsomorphicLayoutEffect'
+import Image from 'next/image'
 
 interface Props {
   article: IArticle
   href: string
+  eager?: boolean
 }
 
 const ArticleCard = forwardRef<HTMLAnchorElement, Props>(
-  ({ article, href }, ref) => {
-    const [isBaseSticky, setIsBaseSticky] = useState(false)
+  ({ article, href, eager }, ref) => {
     const coverFilterRef = useRef<HTMLDivElement | null>(null)
 
     useIsomorphicLayoutEffect(() => {
@@ -35,27 +36,31 @@ const ArticleCard = forwardRef<HTMLAnchorElement, Props>(
         )
       })
 
-      setTimeout(() => {
-        setIsBaseSticky(true)
-      }, 100)
-
       return () => ctx.revert()
     }, [])
 
     return (
       <Link
         className={styles.article}
-        style={{ position: isBaseSticky ? 'sticky' : 'static' }}
         href={href}
         ref={ref}
+        aria-description={article.title}
       >
         <div className={styles.article__wrapper}>
           <div className={styles.article__cover}>
             <span
               className={styles.article__cover__filter}
               ref={coverFilterRef}
+              aria-hidden
             />
-            <img src={article.cover} alt={article.coverAlt} />
+            <Image
+              src={article.cover}
+              alt={article.coverAlt}
+              width={1600}
+              height={900}
+              loading={eager ? 'eager' : 'lazy'}
+              fetchPriority={eager ? 'high' : 'low'}
+            />
           </div>
           <div className={styles.article__title}>
             <h2 className={styles.article__title__inside}>{article.title}</h2>

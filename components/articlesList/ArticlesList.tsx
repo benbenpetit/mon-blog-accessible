@@ -1,8 +1,8 @@
 'use client'
 import { IArticle } from '@/core/types/IArticle'
-import React, { FC, useLayoutEffect } from 'react'
+import React, { FC, useLayoutEffect, useState } from 'react'
 import styles from './ArticlesList.module.scss'
-import Article from '@/components/articleCard/ArticleCard'
+import ArticleCard from '@/components/articleCard/ArticleCard'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 
@@ -11,12 +11,17 @@ interface Props {
 }
 
 const ArticlesList: FC<Props> = ({ articles }) => {
+  const [isBaseSticky, setIsBaseSticky] = useState(false)
   const articleRefs: any = articles.reduce((acc: any, _, index) => {
     acc[index] = React.createRef()
     return acc
   }, {})
 
   useLayoutEffect(() => {
+    setTimeout(() => {
+      setIsBaseSticky(true)
+    }, 100)
+
     gsap.registerPlugin(ScrollTrigger)
     const mm = gsap.matchMedia()
 
@@ -46,12 +51,18 @@ const ArticlesList: FC<Props> = ({ articles }) => {
   return (
     <ul className={styles.articlesList}>
       {articles.map((article, index) => (
-        <Article
+        <li
           key={article._id}
-          article={article}
-          href={`/article/${article.slug}`}
+          className={styles.articlesList__item}
           ref={articleRefs[index]}
-        />
+          style={{ position: isBaseSticky ? 'sticky' : 'static' }}
+        >
+          <ArticleCard
+            article={article}
+            href={`/article/${article.slug}`}
+            eager={index === 0}
+          />
+        </li>
       ))}
     </ul>
   )

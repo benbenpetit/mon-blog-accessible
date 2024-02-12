@@ -2,18 +2,12 @@
   --offset: 5vmin;
   --border-radius: 5vmin;
   display: block;
-  top: var(--offset);
-  height: 60vh;
-  width: calc(100% - 2 * var(--offset));
-  margin: var(--offset);
+  height: 100%;
+  width: 100%;
   border-radius: var(--border-radius);
-  transform-origin: top center;
   outline: 4px dashed #fff;
   overflow: hidden;
-
-  @media screen and (min-width: 768px) {
-    height: calc(100vh - 2 * var(--offset));
-  }
+  position: relative;
 
   &:focus:not(:active) {
     outline: 12px dashed #fff;

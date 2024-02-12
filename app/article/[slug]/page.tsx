@@ -4,6 +4,7 @@ import { groq } from 'next-sanity'
 import * as queries from '@/core/sanity/queries'
 import { IArticle } from '@/core/types/IArticle'
 import { client } from '@/core/lib/sanity'
+import HomeButton from '@/components/articlePage/homeButton/HomeButton'
 
 interface Props {
   params: {
@@ -16,6 +17,7 @@ const Page: NextPage<Props> = async ({ params }) => {
 
   return (
     <>
+      <HomeButton />
       <ArticlePage
         article={data.current}
         prevSlug={data.prevSlug}

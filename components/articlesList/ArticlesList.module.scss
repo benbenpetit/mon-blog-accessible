@@ -5,4 +5,19 @@
     align-items: center;
     row-gap: 5vh;
   }
+
+  &__item {
+    --offset: 5vmin;
+    --border-radius: 5vmin;
+    top: var(--offset);
+    height: 60vh;
+    width: calc(100% - 2 * var(--offset));
+    margin: var(--offset);
+    list-style-type: none;
+    transform-origin: top center;
+
+    @media screen and (min-width: 768px) {
+      height: calc(100vh - 2 * var(--offset));
+    }
+  }
 }
