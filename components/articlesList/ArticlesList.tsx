@@ -2,7 +2,7 @@
 import { IArticle } from '@/core/types/IArticle'
 import React, { FC, useLayoutEffect } from 'react'
 import styles from './ArticlesList.module.scss'
-import Article from '@/components/article/Article'
+import Article from '@/components/articleCard/ArticleCard'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/all'
 

@@ -1,6 +1,6 @@
 'use client'
 import React, { forwardRef, useRef, useState } from 'react'
-import styles from './Article.module.scss'
+import styles from './ArticleCard.module.scss'
 import { IArticle } from '@/core/types/IArticle'
 import Link from 'next/link'
 import gsap from 'gsap'
@@ -11,7 +11,7 @@ interface Props {
   href: string
 }
 
-const Article = forwardRef<HTMLAnchorElement, Props>(
+const ArticleCard = forwardRef<HTMLAnchorElement, Props>(
   ({ article, href }, ref) => {
     const [isBaseSticky, setIsBaseSticky] = useState(false)
     const coverFilterRef = useRef<HTMLDivElement | null>(null)
@@ -71,4 +71,4 @@ const Article = forwardRef<HTMLAnchorElement, Props>(
   }
 )
 
-export default Article
+export default ArticleCard
