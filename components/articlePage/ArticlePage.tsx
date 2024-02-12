@@ -123,6 +123,8 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
             alt={article.coverAlt}
             width={1440}
             height={500}
+            loading="eager"
+            fetchPriority="high"
           />
         </div>
         <div className={styles.articlePage__content}>
