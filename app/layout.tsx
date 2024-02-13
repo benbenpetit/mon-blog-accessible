@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import '@/styles/global.scss'
-import LenisWrapper from '@/components/LenisWrapper'
+import LenisWrapper, { RouteWatcher } from '@/components/LenisWrapper'
 import localFont from 'next/font/local'
+import { Suspense } from 'react'
 
 const neueMontreal = localFont({
   src: [
@@ -31,7 +32,12 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={neueMontreal.className}>
-        <LenisWrapper>{children}</LenisWrapper>
+        <LenisWrapper>
+          <Suspense>
+            <RouteWatcher />
+          </Suspense>
+          {children}
+        </LenisWrapper>
       </body>
     </html>
   )
