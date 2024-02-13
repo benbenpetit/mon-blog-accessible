@@ -4,10 +4,12 @@ import Link from 'next/link'
 
 const HomeButton = () => {
   return (
-    <div className={styles.homeButton}>
-      <Link href={'/'} aria-label={`Retour à la page d'accueil`}>
-        <span>Maison</span>
-      </Link>
+    <div>
+      <div className={styles.homeButton}>
+        <Link href={'/'} aria-label={`Retour à la page d'accueil`}>
+          <span>Maison</span>
+        </Link>
+      </div>
     </div>
   )
 }
