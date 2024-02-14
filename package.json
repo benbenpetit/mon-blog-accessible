@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/bundle-analyzer": "^14.1.0",
     "@portabletext/react": "^3.0.11",
     "@studio-freight/lenis": "^1.0.34",
     "@studio-freight/tempus": "^0.0.44",
