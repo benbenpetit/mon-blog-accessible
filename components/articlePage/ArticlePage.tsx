@@ -1,15 +1,12 @@
 'use client'
 import { IArticle } from '@/core/types/IArticle'
-import React, { FC, useContext, useRef } from 'react'
+import React, { FC, useRef } from 'react'
 import styles from './ArticlePage.module.scss'
 import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
 import { Work_Sans } from 'next/font/google'
 import clsx from 'clsx'
 import useIsomorphicLayoutEffect from '@/core/utils/useIsomorphicLayoutEffect'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
-// import { useLenis } from '@studio-freight/react-lenis'
 import Link from 'next/link'
 import { useLenis } from '@/components/LenisWrapper'
 
@@ -30,7 +27,10 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
   const pageRef = useRef<HTMLDivElement | null>(null)
   const navWrapperRef = useRef<HTMLDivElement | null>(null)
 
-  useIsomorphicLayoutEffect(() => {
+  const startGsapAnim = async () => {
+    const gsap = (await import('gsap')).default
+    const ScrollTrigger = (await import('gsap/ScrollTrigger')).default
+
     gsap.registerPlugin(ScrollTrigger)
 
     const getVMin = (coef: number) => {
@@ -112,6 +112,10 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
         timeline.kill()
       })
     }
+  }
+
+  useIsomorphicLayoutEffect(() => {
+    startGsapAnim()
   }, [])
 
   return (

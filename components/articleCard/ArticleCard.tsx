@@ -3,10 +3,8 @@ import React, { FC, useRef } from 'react'
 import styles from './ArticleCard.module.scss'
 import { IArticle } from '@/core/types/IArticle'
 import Link from 'next/link'
-import gsap from 'gsap'
 import useIsomorphicLayoutEffect from '@/core/utils/useIsomorphicLayoutEffect'
 import Image from 'next/image'
-import { ScrollTrigger } from 'gsap/all'
 
 interface Props {
   article: IArticle
@@ -17,28 +15,31 @@ interface Props {
 const ArticleCard: FC<Props> = ({ article, href, eager }) => {
   const coverFilterRef = useRef<HTMLDivElement | null>(null)
 
-  useIsomorphicLayoutEffect(() => {
+  const startGsapAnim = async () => {
+    const gsap = (await import('gsap')).default
+    const ScrollTrigger = (await import('gsap/ScrollTrigger')).default
+
     gsap.registerPlugin(ScrollTrigger)
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        coverFilterRef.current,
-        {
-          opacity: 0.25,
+    gsap.fromTo(
+      coverFilterRef.current,
+      {
+        opacity: 0.25,
+      },
+      {
+        scrollTrigger: {
+          trigger: coverFilterRef.current,
+          scrub: true,
+          start: 'top-=6%',
+          end: 'bottom+=10%',
         },
-        {
-          scrollTrigger: {
-            trigger: coverFilterRef.current,
-            scrub: true,
-            start: 'top-=6%',
-            end: 'bottom+=10%',
-          },
-          opacity: 0.4,
-        }
-      )
-    })
+        opacity: 0.4,
+      }
+    )
+  }
 
-    return () => ctx.revert()
+  useIsomorphicLayoutEffect(() => {
+    startGsapAnim()
   }, [])
 
   return (

@@ -3,8 +3,6 @@ import { IArticle } from '@/core/types/IArticle'
 import React, { FC, useLayoutEffect, useState } from 'react'
 import styles from './ArticlesList.module.scss'
 import ArticleCard from '@/components/articleCard/ArticleCard'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
 
 interface Props {
   articles: IArticle[]
@@ -17,10 +15,11 @@ const ArticlesList: FC<Props> = ({ articles }) => {
     return acc
   }, {})
 
-  useLayoutEffect(() => {
-    setTimeout(() => {
-      setIsBaseSticky(true)
-    }, 100)
+  const startGsapAnim = async () => {
+    const gsap = (await import('gsap')).default
+    const ScrollTrigger = (await import('gsap/ScrollTrigger')).default
+
+    gsap.registerPlugin(ScrollTrigger)
 
     gsap.registerPlugin(ScrollTrigger)
     const mm = gsap.matchMedia()
@@ -46,6 +45,14 @@ const ArticlesList: FC<Props> = ({ articles }) => {
     })
 
     return () => ctx.revert()
+  }
+
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      setIsBaseSticky(true)
+    }, 100)
+
+    startGsapAnim()
   }, [articles, articleRefs])
 
   return (
