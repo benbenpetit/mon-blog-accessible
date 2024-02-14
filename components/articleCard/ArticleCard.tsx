@@ -57,10 +57,11 @@ const ArticleCard: FC<Props> = ({ article, href, eager }) => {
           <Image
             src={article.cover}
             alt={article.coverAlt}
-            width={1600}
-            height={900}
             loading={eager ? 'eager' : 'lazy'}
             priority={eager}
+            width={1600}
+            height={900}
+            sizes="(max-width: 480px) 75vw, (max-width: 768px) 85vw, 100vw"
           />
         </div>
         <div className={styles.article__title}>
