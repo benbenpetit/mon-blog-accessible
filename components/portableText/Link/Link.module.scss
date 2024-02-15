@@ -1,0 +1,9 @@
+.wrapper {
+  text-decoration: underline;
+  color: #1b7b4e;
+  font-weight: 700;
+
+  &:hover {
+    background-color: rgba(27, 123, 78, 0.1);
+  }
+}

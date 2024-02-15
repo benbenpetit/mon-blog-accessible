@@ -47,7 +47,7 @@
 
   &__content {
     width: 100%;
-    padding: clamp(16px, 8vmin, 8vmin);
+    padding: clamp(16px, 6.5vmin, 6.5vmin);
     padding-bottom: clamp(16px, 10vmin, 10vmin);
     border-radius: var(--border-radius);
 
@@ -110,23 +110,21 @@
           span {
             background-color: #eee;
           }
+
+          &:hover,
+          &:focus {
+            &,
+            * {
+              cursor: url('/img/forbidden.svg') 23 23, pointer;
+            }
+          }
         }
 
         &:hover,
         &:focus {
-          &,
-          * {
-            cursor: not-allowed;
-          }
-
           &:not(.disabled) {
             width: 60%;
             background-color: darken(#eee, 5%);
-
-            &,
-            * {
-              cursor: inherit;
-            }
 
             &:nth-child(2) {
               width: 40%;
@@ -143,23 +141,21 @@
           span {
             background-color: #1b7b4e;
           }
+
+          &:hover,
+          &:focus {
+            &,
+            * {
+              cursor: url('/img/forbidden.svg') 23 23, pointer;
+            }
+          }
         }
 
         &:hover,
         &:focus {
-          &,
-          * {
-            cursor: not-allowed;
-          }
-
           &:not(.disabled) {
             width: 60%;
             background-color: darken(#1b7b4e, 3%);
-
-            &,
-            * {
-              cursor: inherit;
-            }
 
             &:nth-child(1) {
               width: 40%;

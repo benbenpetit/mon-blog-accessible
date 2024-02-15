@@ -4,6 +4,7 @@ import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemas'
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input'
 import customStructure from './customStructure'
+import { codeInput } from '@sanity/code-input'
 
 export default defineConfig({
   name: 'default',
@@ -27,6 +28,7 @@ export default defineConfig({
         { label: 'Custom...', value: 'custom' },
       ],
     }),
+    codeInput(),
   ],
 
   schema: {

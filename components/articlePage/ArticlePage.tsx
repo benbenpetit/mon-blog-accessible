@@ -9,6 +9,7 @@ import clsx from 'clsx'
 import useIsomorphicLayoutEffect from '@/core/utils/useIsomorphicLayoutEffect'
 import Link from 'next/link'
 import { useLenis } from '@/components/LenisWrapper'
+import portableTextComponents from '@/components/portableText/PortableTextComponents'
 
 const workSans = Work_Sans({
   weight: '400',
@@ -133,7 +134,7 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
             src={article.cover}
             alt={article.coverAlt}
             loading="eager"
-            fetchPriority="high"
+            priority
             width={1440}
             height={500}
             sizes="(max-width: 480px) 75vw, (max-width: 768px) 85vw, 100vw"
@@ -147,7 +148,10 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
               styles.articlePage__content__body
             )}
           >
-            <PortableText value={article.body} />
+            <PortableText
+              value={article.body}
+              components={portableTextComponents}
+            />
           </div>
         </div>
       </div>
