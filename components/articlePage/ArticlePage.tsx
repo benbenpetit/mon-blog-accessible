@@ -22,7 +22,6 @@ interface Props {
 }
 
 const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
-  // const lenis = useLenis()
   const lenis = useLenis()
   const pageRef = useRef<HTMLDivElement | null>(null)
   const navWrapperRef = useRef<HTMLDivElement | null>(null)
@@ -43,6 +42,13 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
         window.innerHeight || 0
       )
       return (Math.min(vw, vh) / 100) * coef
+    }
+
+    const getFullWidth = () => {
+      return Math.max(
+        document.documentElement.clientWidth || 0,
+        window.innerWidth || 0
+      )
     }
 
     const getHeight = () => {
@@ -75,7 +81,7 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
         },
         {
           height: getHeight() - getVMin(12),
-          maxWidth: '100%',
+          maxWidth: getFullWidth() - getVMin(12),
           ease: 'none',
         }
       )
@@ -100,7 +106,7 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
           },
           {
             height: getHeight() - getVMin(12),
-            maxWidth: '100%',
+            maxWidth: getFullWidth() - getVMin(12),
             ease: 'none',
           }
         )
