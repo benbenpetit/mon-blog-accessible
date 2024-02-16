@@ -14,6 +14,8 @@ import portableTextComponents from '@/components/portableText/PortableTextCompon
 const workSans = Work_Sans({
   weight: '400',
   subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
 })
 
 interface Props {
