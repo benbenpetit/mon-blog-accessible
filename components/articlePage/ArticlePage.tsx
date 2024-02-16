@@ -8,7 +8,8 @@ import clsx from 'clsx'
 import useIsomorphicLayoutEffect from '@/core/utils/useIsomorphicLayoutEffect'
 import Link from 'next/link'
 import { useLenis } from '@/components/LenisWrapper'
-import dynamic from 'next/dynamic'
+import { PortableText } from '@portabletext/react'
+import portableTextComponents from '@/components/portableText/PortableTextComponents'
 
 const workSans = Work_Sans({
   weight: '400',
@@ -20,8 +21,6 @@ interface Props {
   prevSlug?: string
   nextSlug?: string
 }
-
-const Body = dynamic(() => import('@/components/articlePage/body/Body'))
 
 const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
   const lenis = useLenis()
@@ -149,7 +148,10 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
               styles.articlePage__content__body
             )}
           >
-            <Body content={article.body} />
+            <PortableText
+              value={article.body}
+              components={portableTextComponents}
+            />
           </div>
         </div>
       </div>
