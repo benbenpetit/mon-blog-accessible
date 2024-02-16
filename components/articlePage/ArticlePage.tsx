@@ -3,13 +3,12 @@ import { IArticle } from '@/core/types/IArticle'
 import React, { FC, useRef } from 'react'
 import styles from './ArticlePage.module.scss'
 import Image from 'next/image'
-import { PortableText } from '@portabletext/react'
 import { Work_Sans } from 'next/font/google'
 import clsx from 'clsx'
 import useIsomorphicLayoutEffect from '@/core/utils/useIsomorphicLayoutEffect'
 import Link from 'next/link'
 import { useLenis } from '@/components/LenisWrapper'
-import portableTextComponents from '@/components/portableText/PortableTextComponents'
+import dynamic from 'next/dynamic'
 
 const workSans = Work_Sans({
   weight: '400',
@@ -21,6 +20,8 @@ interface Props {
   prevSlug?: string
   nextSlug?: string
 }
+
+const Body = dynamic(() => import('@/components/articlePage/body/Body'))
 
 const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
   const lenis = useLenis()
@@ -148,10 +149,7 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
               styles.articlePage__content__body
             )}
           >
-            <PortableText
-              value={article.body}
-              components={portableTextComponents}
-            />
+            <Body content={article.body} />
           </div>
         </div>
       </div>

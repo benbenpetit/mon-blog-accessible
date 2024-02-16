@@ -4,13 +4,17 @@ import { groq } from 'next-sanity'
 import * as queries from '@/core/sanity/queries'
 import { IArticle } from '@/core/types/IArticle'
 import { client } from '@/core/lib/sanity'
-import HomeButton from '@/components/articlePage/homeButton/HomeButton'
+import dynamic from 'next/dynamic'
 
 interface Props {
   params: {
     slug: string
   }
 }
+
+const HomeButton = dynamic(
+  () => import('@/components/articlePage/homeButton/HomeButton')
+)
 
 const Page: NextPage<Props> = async ({ params }) => {
   const data = await getData(params.slug)
