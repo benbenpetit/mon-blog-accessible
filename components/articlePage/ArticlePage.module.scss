@@ -23,6 +23,7 @@
     border-radius: 0 0 var(--border-radius) var(--border-radius);
     transform: translateX(-3vmin);
     outline: 1vmin dashed #fff;
+    background-color: #eee;
 
     &__filter {
       position: absolute;

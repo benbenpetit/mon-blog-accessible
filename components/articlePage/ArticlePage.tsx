@@ -10,7 +10,6 @@ import Link from 'next/link'
 import { useLenis } from '@/components/LenisWrapper'
 import { PortableText } from '@portabletext/react'
 import portableTextComponents from '@/components/portableText/PortableTextComponents'
-import getBlurData from '@/core/utils/getBlurData'
 
 const workSans = Work_Sans({
   weight: '400',
@@ -25,15 +24,10 @@ interface Props {
   nextSlug?: string
 }
 
-const ArticlePage: FC<Props> = async ({
-  article,
-  prevSlug = '',
-  nextSlug = '',
-}) => {
+const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
   const lenis = useLenis()
   const pageRef = useRef<HTMLDivElement | null>(null)
   const navWrapperRef = useRef<HTMLDivElement | null>(null)
-  const { base64 } = await getBlurData(article.cover)
 
   const startGsapAnim = async () => {
     const gsap = (await import('gsap')).default
@@ -146,8 +140,6 @@ const ArticlePage: FC<Props> = async ({
             width={1440}
             height={500}
             sizes="(max-width: 480px) 75vw, (max-width: 768px) 85vw, 100vw"
-            placeholder="blur"
-            blurDataURL={base64}
           />
         </div>
         <div className={styles.articlePage__content}>
