@@ -17,6 +17,8 @@ const neueMontreal = localFont({
       style: 'normal',
     },
   ],
+  display: 'swap',
+  variable: '--font-sans',
 })
 
 export const metadata: Metadata = {

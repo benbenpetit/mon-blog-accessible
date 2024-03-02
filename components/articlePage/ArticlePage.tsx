@@ -3,18 +3,20 @@ import { IArticle } from '@/core/types/IArticle'
 import React, { FC, useRef } from 'react'
 import styles from './ArticlePage.module.scss'
 import Image from 'next/image'
-import { PortableText } from '@portabletext/react'
 import { Work_Sans } from 'next/font/google'
 import clsx from 'clsx'
 import useIsomorphicLayoutEffect from '@/core/utils/useIsomorphicLayoutEffect'
 import Link from 'next/link'
 import { useLenis } from '@/components/LenisWrapper'
+import { PortableText } from '@portabletext/react'
 import portableTextComponents from '@/components/portableText/PortableTextComponents'
 import getBlurData from '@/core/utils/getBlurData'
 
 const workSans = Work_Sans({
   weight: '400',
   subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
 })
 
 interface Props {
