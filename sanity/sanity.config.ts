@@ -8,7 +8,7 @@ import { codeInput } from '@sanity/code-input'
 
 export default defineConfig({
   name: 'default',
-  title: 'my-accessibility-blog',
+  title: 'mon-blog-accessible',
 
   projectId: '0s2izsp8',
   dataset: 'production',
