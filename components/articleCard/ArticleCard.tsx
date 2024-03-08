@@ -47,6 +47,7 @@ const ArticleCard: FC<Props> = ({ article, href, eager }) => {
       className={styles.article}
       href={href}
       aria-description={article.title}
+      prefetch={false}
     >
       <div className={styles.article__wrapper}>
         <div className={styles.article__cover}>

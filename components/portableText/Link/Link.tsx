@@ -18,6 +18,7 @@ const Link: FC<Props> = ({ children, value }) => {
       href={value.href}
       target="_blank"
       rel={rel}
+      prefetch={false}
     >
       {children}
     </NextLink>

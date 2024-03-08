@@ -183,6 +183,7 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
                 onFocus={() => {
                   lenis?.scrollTo(document.body.scrollHeight)
                 }}
+                prefetch={false}
               >
                 {!isSlug && (
                   <div className={styles.rubalise} aria-hidden>
