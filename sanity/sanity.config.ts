@@ -5,6 +5,7 @@ import { schemaTypes } from './schemas'
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input'
 import customStructure from './customStructure'
 import { codeInput } from '@sanity/code-input'
+import { media } from 'sanity-plugin-media'
 
 export default defineConfig({
   name: 'default',
@@ -29,6 +30,7 @@ export default defineConfig({
       ],
     }),
     codeInput(),
+    media(),
   ],
 
   schema: {
