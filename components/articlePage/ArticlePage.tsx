@@ -115,6 +115,10 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
         )
     })
 
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'))
+    }, 100)
+
     return () => {
       timeline.kill()
       window.removeEventListener('resize', () => {
@@ -184,6 +188,7 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
                   lenis?.scrollTo(document.body.scrollHeight)
                 }}
                 prefetch={false}
+                onClick={(e) => !isSlug && e.preventDefault()}
               >
                 {!isSlug && (
                   <div className={styles.rubalise} aria-hidden>
