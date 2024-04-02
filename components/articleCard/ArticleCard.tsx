@@ -10,15 +10,15 @@ interface Props {
   article: IArticle
   href: string
   eager?: boolean
+  onFocus: () => void
 }
 
-const ArticleCard: FC<Props> = ({ article, href, eager }) => {
+const ArticleCard: FC<Props> = ({ article, href, eager, onFocus }) => {
   const coverFilterRef = useRef<HTMLDivElement | null>(null)
 
   const startGsapAnim = async () => {
     const gsap = (await import('gsap')).default
     const ScrollTrigger = (await import('gsap/ScrollTrigger')).default
-
     gsap.registerPlugin(ScrollTrigger)
 
     gsap.fromTo(
@@ -48,6 +48,7 @@ const ArticleCard: FC<Props> = ({ article, href, eager }) => {
       href={href}
       aria-description={article.title}
       prefetch={false}
+      onFocus={onFocus}
     >
       <div className={styles.article__wrapper}>
         <div className={styles.article__cover}>

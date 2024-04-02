@@ -32,8 +32,11 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
   const startGsapAnim = async () => {
     const gsap = (await import('gsap')).default
     const ScrollTrigger = (await import('gsap/ScrollTrigger')).default
-
     gsap.registerPlugin(ScrollTrigger)
+
+    setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 500)
 
     const getVMin = (coef: number) => {
       const vw = Math.max(
@@ -114,10 +117,6 @@ const ArticlePage: FC<Props> = ({ article, prevSlug = '', nextSlug = '' }) => {
           }
         )
     })
-
-    setTimeout(() => {
-      window.dispatchEvent(new Event('resize'))
-    }, 100)
 
     return () => {
       timeline.kill()

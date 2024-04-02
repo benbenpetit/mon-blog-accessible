@@ -9,6 +9,7 @@
   &__item {
     --offset: 5vmin;
     --border-radius: 5vmin;
+    position: sticky;
     top: var(--offset);
     height: 60vh;
     width: calc(100% - 2 * var(--offset));

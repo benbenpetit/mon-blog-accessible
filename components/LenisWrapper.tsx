@@ -49,6 +49,13 @@ export const RouteWatcher = () => {
 
   useEffect(() => {
     lenis?.scrollTo(0, { immediate: true })
+    document.fonts.ready.then(async () => {
+      console.log('fonts ready')
+      const gsap = (await import('gsap')).default
+      const ScrollTrigger = (await import('gsap/ScrollTrigger')).default
+      gsap.registerPlugin(ScrollTrigger)
+      ScrollTrigger.refresh()
+    })
   }, [pathname, searchParams])
 
   return null
